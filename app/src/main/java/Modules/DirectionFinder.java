@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Lê Bảo Chi on 4/8/2017
+ * Created by Lê Bảo Chi on 4/8/2017.
  */
 
 public class DirectionFinder {
