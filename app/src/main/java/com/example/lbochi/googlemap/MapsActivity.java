@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -31,7 +32,8 @@ import Modules.DirectionFinder;
 import Modules.DirectionFinderListener;
 import Modules.Route;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,DirectionFinderListener {
+public class MapsActivity extends FragmentActivity implements  OnMapReadyCallback,DirectionFinderListener,GoogleMap.OnMapClickListener {
+    private MapFragment mMapFragment;
 
     private GoogleMap mMap;
     private Button btnFindPath;
@@ -102,6 +104,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         mMap.setMyLocationEnabled(true);
+        mMap.setOnMapClickListener(this);
     }
 
 
@@ -161,4 +164,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             polylinePaths.add(mMap.addPolyline(polylineOptions));
         }
     }
+
+
+    @Override
+    public void onMapClick( LatLng point) {
+        mMapFragment = ((MapFragment) getFragmentManager().findFragmentById(R.id.map));
+
+        mMap.addMarker(new MarkerOptions()
+                .position(point)
+                .title("TouchPoint1"));
+    }
+   
 }
