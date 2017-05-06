@@ -32,7 +32,7 @@ import Modules.DirectionFinder;
 import Modules.DirectionFinderListener;
 import Modules.Route;
 
-public class MapsActivity extends FragmentActivity implements  OnMapReadyCallback,DirectionFinderListener,GoogleMap.OnMapClickListener {
+public class MapsActivity extends FragmentActivity implements  OnMapReadyCallback,DirectionFinderListener,GoogleMap.OnMapClickListener,GoogleMap.OnMarkerClickListener {
     private MapFragment mMapFragment;
 
     private GoogleMap mMap;
@@ -105,6 +105,7 @@ public class MapsActivity extends FragmentActivity implements  OnMapReadyCallbac
         }
         mMap.setMyLocationEnabled(true);
         mMap.setOnMapClickListener(this);
+        mMap.setOnMarkerClickListener(this);
     }
 
 
@@ -165,7 +166,6 @@ public class MapsActivity extends FragmentActivity implements  OnMapReadyCallbac
         }
     }
 
-
     @Override
     public void onMapClick( LatLng point) {
         mMapFragment = ((MapFragment) getFragmentManager().findFragmentById(R.id.map));
@@ -174,5 +174,11 @@ public class MapsActivity extends FragmentActivity implements  OnMapReadyCallbac
                 .position(point)
                 .title("TouchPoint1"));
     }
-   
+
+    public boolean onMarkerClick (Marker marker){
+        marker.setTitle(String.valueOf(marker));
+        return  false;
+    }
+
+
 }
